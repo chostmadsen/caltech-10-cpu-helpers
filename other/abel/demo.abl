@@ -1,0 +1,96 @@
+MODULE      DEMO
+TITLE       'Demo File'
+
+"-INFO-----------------------------------------------------------------------------------"
+
+" Description
+"       General top-level tester. Defines the switches (inputs) and displays (outputs)
+"       for demonstrating each of the different units of the CPU. Totals to 51 inputs
+"       and 35 outputs.
+
+" Inputs
+"       data_off[7..0]          8 bits of data or offset input
+"       adrs_data[12..0]        13 bits of address data or data input
+"       ctrl[29..0]             30 bits of control input
+"       reset                   system reset
+"       clock                   system clock
+
+" Outputs
+"       acc_adrs[12..0]         13 bits of address or accumulator output
+"       x_reg[7..0]             8 bits of register X output
+"       s_reg[7..0]             8 bits of register S output
+"       flags[7..0]             8 bits of flag output (active low)
+
+" History
+"       2018.02.06  Glen George             initial revision
+"       2018.02.14  Glen George             fixed typos
+"       2020.01.08  Glen George             updated comments
+"       2021.01.04  Glen George             updated comments
+"       2026.02.25  Christian Host-Madsen   reformatted
+
+"-PIN-/-SIGNAL-/-BUS-DECLARATION---------------------------------------------------------"
+
+" inputs
+    " 8-bit data / offset input
+    data_off_7..data_off_6      pin     80..81;
+    data_off_5..data_off_0      pin     83..88;
+
+    " 13-bit data or address input
+    adrs_data_12..adrs_data_9   pin     102..105;
+    adrs_data_8                 pin     111;
+    adrs_data_7..adrs_data_2    pin     93..98;
+    adrs_data_1..adrs_data_0    pin     100..101;
+
+    " 30 bits of control input
+    ctrl_29..ctrl_26            pin     14..11;
+    ctrl_25..ctrl_20            pin     9..4;
+    ctrl_19..ctrl_14            pin     143..138;
+    ctrl_13..ctrl_9             pin     135..131;
+    ctrl_8..ctrl_4              pin     124..120;
+    ctrl_3..ctrl_0              pin     116..113;
+
+    " system reset
+    reset                       pin     40;
+
+    " system clock
+    clock                       pin     128;
+
+" outputs
+    " 13 bits of accumulator / address
+    acc_adrs_12..acc_adrs_8     pin     29..33;
+    acc_adrs_7                  pin     16;
+    acc_adrs_6..acc_adrs_1      pin     21..26;
+    acc_adrs_0                  pin     28;
+
+    " 8 bits of X register
+    x_reg_7..x_reg_4            pin     68..71;
+    x_reg_3..x_reg_0            pin     76..79;
+
+    " 8 bits of S register
+    s_reg_7..s_reg_2            pin     58..63;
+    s_reg_1..s_reg_0            pin     66..67;
+
+    " 8 bits of flags (active low)
+    !flags_7..!flags_5          pin     42..44;
+    !flags_4..!flags_0          pin     48..52;
+
+" buses
+    data_off    =   [data_off_7..data_off_0];       " 8-bit data / offset
+    adrs_data   =   [adrs_data_12..adrs_data_0];    " 13-bit data or address
+    ctrl        =   [ctrl_29..ctrl_0];              " 30 bits of control
+    acc_adrs    =   [acc_adrs_12..acc_adrs_0];      " 13 bits of accumulator / address
+    flags       =   [flags_7..flags_0];             " 8 bits of flags (active low)
+    x_reg       =   [x_reg_7..x_reg_0];             " 8 bits of X register
+    s_reg       =   [s_reg_7..s_reg_0];             " 8 bits of S register
+
+"-TEST-UNIT------------------------------------------------------------------------------"
+
+    " TODO: CONNECT UNIT
+
+"-EQUATIONS------------------------------------------------------------------------------"
+EQUATIONS
+
+" TODO: EQUATIONS
+
+END         DEMO
+

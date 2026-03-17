@@ -1,0 +1,16 @@
+set -e
+if [ $# -lt 2 ]; then
+    echo "usage: ./group_dir <instruction file.csv> <group dir>"
+    exit 1
+fi
+
+instr="$1"
+dir="$2"
+
+rm -f "$dir"/o*.txt
+for f in "$dir"/*.txt; do
+    base=$(basename "$f" .txt)
+    out="$dir/o$base.txt"
+    echo "./bin/grouper $instr $f $out"
+    ./grouper "$instr" "$f" "$out"
+done

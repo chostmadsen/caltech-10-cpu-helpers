@@ -1,0 +1,4 @@
+lsr
+asr
+ror
+rrc
