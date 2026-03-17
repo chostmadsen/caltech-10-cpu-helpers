@@ -22,11 +22,6 @@ typedef struct {                                                                
     mask_t      mask;
 } Mask;
 
-typedef struct {                                                                // maskset type
-    Mask       *bits;
-    int         size;
-} MaskSet;
-
 typedef struct {                                                                // instruction type
     char        opcode[OPCODE_SIZE + 1];
     Mask        instr;

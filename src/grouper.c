@@ -4,7 +4,7 @@
 #include    <stdbool.h>
 #include    "grouper.h"
 
-/*-LONE-GROUP-MINIMIZER-----------------------------------------------------------------------------------------------*/
+/*-LONE-GROUPER-------------------------------------------------------------------------------------------------------*/
 
 static int num_x_(const Mask mask) {                                            // number of don't cares
     int num = 0;
@@ -99,10 +99,4 @@ Mask *lone_group(const InstrSet *set, const StringSet *subset) {                
         return NULL;
     }
     return best;
-}
-
-/*-LONE-GROUP-JOINING-------------------------------------------------------------------------------------------------*/
-
-MaskSet *join_groups(const Mask *masks, const int num) {                        // joins lone groups
-    return NULL;
 }

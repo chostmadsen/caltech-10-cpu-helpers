@@ -1,6 +1,5 @@
 #include    <stdlib.h>
 #include    <string.h>
-#include    <stdbool.h>
 #include    "types.h"
 #include    "set.h"
 
@@ -45,7 +44,7 @@ static void strip_spaces_(char *s) {                                            
  * @param fp        file pointer.
  * @return          instruction set.
  */
-InstrSet instr_set(FILE *fp) {                                                  // create instruction set
+InstrSet read_instr_set(FILE *fp) {                                                  // create instruction set
     int             capacity    =   8;
     int             count       =  -1;
     const InstrSet  fail        =   { .instrs=NULL, .size=0 };
@@ -97,24 +96,12 @@ InstrSet instr_set(FILE *fp) {                                                  
 }
 
 /**
- * Frees an instruction set.
- *
- * @param set       instruction set.
- */
-void free_instrs(InstrSet *set) {
-    for (int i = 0; i < set->size; ++i) {
-        free(set->instrs);
-    }
-    free(set);
-}
-
-/**
  * Creates a set of strings.
  *
  * @param fp        file pointer.
  * @return          string set.
  */
-StringSet string_set(FILE *fp) {                                                // write skip set
+StringSet read_string_set(FILE *fp) {                                                // write string set
     StringSet set = { .size=0 };
 
     // create string set
@@ -126,6 +113,30 @@ StringSet string_set(FILE *fp) {                                                
     }
 
     return set;
+}
+
+/**
+ * Reads a mask from a file. Only reads the first line.
+ *
+ * @param fp        file pointer.
+ * @return          mask.
+ */
+Mask read_mask(FILE *fp) {
+    char line[IR_SIZE + 1];
+    fgets(line, IR_SIZE + 1, fp);
+    return encode_(line);
+}
+
+/**
+ * Frees an instruction set.
+ *
+ * @param set       instruction set.
+ */
+void free_instrs(InstrSet *set) {
+    for (int i = 0; i < set->size; ++i) {
+        free(set->instrs);
+    }
+    free(set);
 }
 
 static void print_colored_mask_(const char *str) {                              // uses coloring
@@ -153,31 +164,6 @@ void print_instr_set(const InstrSet *set) {                                     
     }
 }
 
-static bool in_set_(const StringSet *set, const char *instr) {
-    for (int i = 0; i < set->size; ++i) {
-        if (strcmp(set->opcode[i], instr) == 0)  return true;
-    }
-    return false;
-}
-
-/**
- * Prints a subset of the instruction set, with don't cares as xs.
- *
- * @param set       instruction set.
- * @param subset    subset opcodes.
- */
-void print_instr_subset(const InstrSet *set, const StringSet *subset) {
-    for (int i = 0; i < set->size; ++i) {
-        if (in_set_(subset, set->instrs[i].opcode)) {
-            printf("%s", set->instrs[i].opcode);
-            for (int j = 0; j < OPCODE_SIZE - strlen(set->instrs[i].opcode); ++j)    printf(" ");
-            char *instr_str = decode_(set->instrs[i].instr);
-            print_colored_mask_(instr_str);
-            free(instr_str);
-        }
-    }
-}
-
 /**
  * Prints a mask, with don't cares as xs.
  *
@@ -187,17 +173,6 @@ void print_mask(const Mask *mask) {
     char *str = decode_(*mask);
     print_colored_mask_(str);
     free(str);
-}
-
-/**
- * Prints a mask set, with don't cares as xs.
- *
- * @param masks     mask set.
- */
-void print_mask_set(const MaskSet *masks) {
-    for (int i = 0; i < masks->size; ++i) {
-        print_mask(&masks->bits[i]);
-    }
 }
 
 /**
@@ -212,7 +187,7 @@ void write_instr_set(const InstrSet *set, FILE *fp) {                           
         fprintf(fp, "%s,", set->instrs[i].opcode);
         for (int j = 0; j < OPCODE_SIZE - strlen(set->instrs[i].opcode); ++j)    fprintf(fp, " ");
         char *instr_str = decode_(set->instrs[i].instr);
-        fprintf(fp, "    %s\n", instr_str);
+        fprintf(fp, "%s\n", instr_str);
         free(instr_str);
     }
 }

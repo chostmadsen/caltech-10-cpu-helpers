@@ -1,4 +1,3 @@
-#include    <stdio.h>
 #include    "set.h"
 #include    "minimizer.h"
 
@@ -16,7 +15,7 @@ int main(const int argc, const char **argv) {                                   
         fprintf(stderr, "unable to open input instruction set `%s`\n", argv[1]);
         return 1;
     }
-    const InstrSet instrs = instr_set(fp);
+    const InstrSet instrs = read_instr_set(fp);
     fclose(fp);
 
     // minimize instructions
