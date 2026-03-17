@@ -31,7 +31,7 @@ static bool conflicts_(const Mask mask, const InstrSet set, const int idx) {    
  *
  * @param set       instruction set.
  * @return          status code.
- * */
+ */
 int lone_min(const InstrSet *set) {                                             // full instruction minimization
     // create org
     Instr *org_instrs = malloc(set->size * sizeof(Instr));

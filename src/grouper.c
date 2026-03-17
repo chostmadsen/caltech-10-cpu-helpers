@@ -54,7 +54,7 @@ Mask *lone_group(const InstrSet *set, const StringSet *subset) {                
     // check subset
     for (int i = 0; i < subset->size; ++i) {
         if (!proper_subset_opcode_(subset->opcode[i], set)) {
-            fprintf(stderr, "invalid subset\n");
+            fprintf(stderr, "invalid subset; invalid opcode `%s`\n", subset->opcode[i]);
             return NULL;
         }
     }
