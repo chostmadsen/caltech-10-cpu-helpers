@@ -1,0 +1,15 @@
+call_3_a,   1000  111xxxxxxxxxxxxx
+call_2_a,   0100  111xxxxxxxxxxxxx
+pushf,      xxxx  0000111000000000
+out_p,      xxxx  10110000xxxxxxxx
+std_o,      xxxx  10100000xxxxxxxx
+st_x+o,     xxxx  10110111xxxxxxxx
+st_x++o,    xxxx  10110110xxxxxxxx
+st_x-+o,    xxxx  10111110xxxxxxxx
+st_+x+o,    xxxx  10100110xxxxxxxx
+st_-x+o,    xxxx  10101110xxxxxxxx
+st_s+o,     xxxx  10110011xxxxxxxx
+st_s++o,    xxxx  10110010xxxxxxxx
+st_s-+o,    xxxx  10111010xxxxxxxx
+st_+s+o,    xxxx  10100010xxxxxxxx
+st_-s+o,    xxxx  10101010xxxxxxxx

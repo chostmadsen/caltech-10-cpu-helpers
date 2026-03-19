@@ -1,14 +1,14 @@
 #include    "set.h"
 
 /**
- * Prints an instruction set.
+ * Prints a instruction set for able to use it.
  *
  * @param argc
- * @param argv      ./print_instr_set <instr.csv>
+ * @param argv      ./set_to_vec <instr.csv>
  */
 int main(const int argc, const char **argv) {                                   // main
     if (argc < 2) {
-        fprintf(stderr, "usage: ./print_instr_set <instr.csv>\n");
+        fprintf(stderr, "usage: ./set_to_vec <instr.csv>\n");
         return 1;
     }
 
@@ -21,7 +21,7 @@ int main(const int argc, const char **argv) {                                   
     const StringSet skip = { .size=0 };
     const InstrSet instrs = read_instr_set(fp, &skip);
     fclose(fp);
-    print_instr_set(&instrs);
+    vec_instr_set(&instrs);
 
     return 0;
 }

@@ -1,4 +1,0 @@
-ja_r
-jns_r
-jnv_r
-jl_r

@@ -1,11 +1,15 @@
 #include    "set.h"
 #include    "minimizer.h"
 
-/** TODO
+/**
+ * Finds the maximum number of don't cares needed to recognize a control signal.
+ *
+ * @param argc
+ * @param argv      ./minimize <instr.csv> ?<out.csv>
  */
 int main(const int argc, const char **argv) {                                   // main
     if (argc < 2) {
-        fprintf(stderr, "usage: ./lone_minimizer <instruction file.csv> ?<out file.csv>\n");
+        fprintf(stderr, "usage: ./minimize <instr.csv> ?<out.csv>\n");
         return 1;
     }
 
@@ -15,7 +19,8 @@ int main(const int argc, const char **argv) {                                   
         fprintf(stderr, "unable to open input instruction set `%s`\n", argv[1]);
         return 1;
     }
-    const InstrSet instrs = read_instr_set(fp);
+    const StringSet skip = { .size=0 };
+    const InstrSet instrs = read_instr_set(fp, &skip);
     fclose(fp);
 
     // minimize instructions

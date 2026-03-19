@@ -1,5 +1,6 @@
 #include    <stdlib.h>
 #include    <string.h>
+#include    <stdbool.h>
 #include    "types.h"
 #include    "set.h"
 
@@ -37,14 +38,25 @@ static void strip_spaces_(char *s) {                                            
     *out = '\0';
 }
 
+static bool in_set(const char *opcode, const StringSet *skip) {
+    for (int i = 0; i < skip->size; ++i) {
+        if (strcmp(opcode, skip->opcode[i]) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /**
  * Creates the instruction set from a file pointer.
+ * Skips instructions in the skip set.
  * My linter says this causes a memory leak, but I'm pretty sure it doesn't.
  *
  * @param fp        file pointer.
+ * @param skip      skip set.
  * @return          instruction set.
  */
-InstrSet read_instr_set(FILE *fp) {                                                  // create instruction set
+InstrSet read_instr_set(FILE *fp, const StringSet *skip) {                      // create instruction set
     int             capacity    =   8;
     int             count       =  -1;
     const InstrSet  fail        =   { .instrs=NULL, .size=0 };
@@ -57,6 +69,7 @@ InstrSet read_instr_set(FILE *fp) {                                             
     }
 
     // create instruction set
+    StringSet instr_strs = { .size=0 };
     char line[LINE_SIZE];
     for (int line_n = 1; fgets(line, LINE_SIZE, fp) != NULL; ++line_n) {
         // set line
@@ -70,9 +83,13 @@ InstrSet read_instr_set(FILE *fp) {                                             
             return fail;
         }
 
-        // strip spaces
+        // get opcode
         *delim              =   '\0';
         const char *opcode  =   line;
+        strcpy(instr_strs.opcode[instr_strs.size++], opcode);
+        if (in_set(opcode, skip))   continue;
+
+        // strip spaces
         char       *instr   =   delim + 1;
         strip_spaces_(instr);
 
@@ -92,7 +109,22 @@ InstrSet read_instr_set(FILE *fp) {                                             
     }
 
     // successful read
-    return (InstrSet){ .instrs=instrs, .size=count + 1 };
+    const InstrSet res =  (InstrSet){ .instrs=instrs, .size=count + 1 };
+
+    // verify skip set
+    bool is_in = false;
+    for (int i = 0; i < skip->size; ++i) {
+        is_in = false;
+        for (int j = 0; j < instr_strs.size; ++j) {
+            if (strcmp(skip->opcode[i], instr_strs.opcode[j]) == 0) {
+                is_in = true;
+                break;
+            }
+        }
+        if (!is_in)     fprintf(stderr, "element %d: invalid opcode `%s`\n", i + 1, skip->opcode[i]);
+    }
+
+    return res;
 }
 
 /**
@@ -161,6 +193,23 @@ void print_instr_set(const InstrSet *set) {                                     
         char *instr_str = decode_(set->instrs[i].instr);
         print_colored_mask_(instr_str);
         free(instr_str);
+    }
+}
+
+void vec_instr_set(const InstrSet *set) {
+    for (int i = 0; i < set->size; ++i) {
+        printf("%s", set->instrs[i].opcode);
+        for (int j = 0; j < OPCODE_SIZE - strlen(set->instrs[i].opcode); ++j)    printf(" ");
+        char *str = decode_(set->instrs[i].instr);
+        printf("= [ ");
+        for (int j = 0; j < IR_SIZE; ++j) {
+            if          (str[j] == 'x')     printf(".X.");
+            else if     (str[j] == '1')     printf("  1");
+            else                            printf("  0");
+            printf("%s", (j == IR_SIZE - 1) ? " " : ",");
+        }
+        printf("]\n");
+        free(str);
     }
 }
 

@@ -1,10 +1,14 @@
 #include    "set.h"
 
-/** TODO
+/**
+ * Prints a mask.
+ *
+ * @param argc
+ * @param argv      ./print_mask <mask.txt>
  */
 int main(const int argc, const char **argv) {                                   // main
     if (argc < 2) {
-        fprintf(stderr, "usage: ./print_mask <mask file.txt>\n");
+        fprintf(stderr, "usage: ./print_mask <mask.txt>\n");
         return 1;
     }
 

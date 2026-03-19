@@ -10,10 +10,9 @@
 #define     DLM             ','
 
 // for code minimization
-#define     IR_SIZE         16
-typedef     uint16_t        mask_t;
-#define     MAX             UINT16_MAX
-#define     MAX_DEPTH       5;
+#define     IR_SIZE         20
+typedef     uint32_t        mask_t;
+#define     MAX_N           1048575
 
 /*-STRUCTS------------------------------------------------------------------------------------------------------------*/
 
@@ -21,6 +20,11 @@ typedef struct {                                                                
     mask_t      val;
     mask_t      mask;
 } Mask;
+
+typedef struct {                                                                // mask set type
+    Mask       *masks;
+    int         size;
+} MaskSet;
 
 typedef struct {                                                                // instruction type
     char        opcode[OPCODE_SIZE + 1];

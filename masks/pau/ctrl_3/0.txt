@@ -1,0 +1,4 @@
+jle_o
+jnu_o
+jne/jnz_o
+jae/jnc_o

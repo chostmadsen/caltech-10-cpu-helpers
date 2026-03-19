@@ -4,7 +4,7 @@
 #include    <stdio.h>
 #include    "types.h"
 
-InstrSet read_instr_set(FILE *fp);
+InstrSet read_instr_set(FILE *fp, const StringSet *skip);
 
 StringSet read_string_set(FILE *fp);
 
@@ -13,6 +13,8 @@ Mask read_mask(FILE *fp);
 void free_instrs(InstrSet *set);
 
 void print_instr_set(const InstrSet *set);
+
+void vec_instr_set(const InstrSet *set);
 
 void print_mask(const Mask *mask);
 

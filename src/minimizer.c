@@ -59,7 +59,7 @@ int lone_min(const InstrSet *set) {                                             
             // no conflict
             best    =   masked;
             max_x   =   xs;
-        } while (mask++ < MAX);
+        } while (mask++ < MAX_N);
         *org_m = best;
     }
 

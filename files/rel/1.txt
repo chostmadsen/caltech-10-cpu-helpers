@@ -1,4 +1,0 @@
-jbe_r
-js_r
-jv_r
-jge_r

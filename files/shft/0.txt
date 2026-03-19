@@ -1,4 +1,0 @@
-lsr
-asr
-ror
-rrc

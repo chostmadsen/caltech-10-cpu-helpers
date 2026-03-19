@@ -1,0 +1,16 @@
+ja_o
+jae/jnc_o
+jb/jc_o
+jbe_o
+je/jz_o
+jg_o
+jge_o
+jl_o
+jle_o
+jne/jnz_o
+jns_o
+jnu_o
+jnv_o
+js_o
+ju_o
+jv_o

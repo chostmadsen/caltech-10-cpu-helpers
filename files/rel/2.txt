@@ -1,4 +1,0 @@
-jae/jnc_r
-jne/jnz_r
-jle_r
-jnu_r
