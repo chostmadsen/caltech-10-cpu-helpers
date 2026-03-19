@@ -208,6 +208,7 @@ MaskSet *full_group(const InstrSet *set, StringSet *subset) {             // heu
 
     // continuously group out
     while (subset->size > 0) {
+        printf("subset size %d\n", subset->size);
         const Mask *best    =   best_group_(set, subset, &cleaned);
         if (best == NULL) {
             fprintf(stderr, "if you're seeing this, you've fucked up\n");
