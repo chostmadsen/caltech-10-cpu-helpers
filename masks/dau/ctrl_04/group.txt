@@ -1,0 +1,13 @@
+dex
+pushf
+des
+call_3_a
+call_2_a
+st_-x_o
+st_x-_o
+st_-s_o
+st_s-_o
+ld_-x_o
+ld_x-_o
+ld_-s_o
+ld_s-_o

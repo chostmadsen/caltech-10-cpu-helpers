@@ -159,6 +159,27 @@ Mask read_mask(FILE *fp) {
     return encode_(line);
 }
 
+MaskSet *read_masks(FILE *fp) {
+    int current = -1;
+    int capacity = 8;
+    Mask *masks = malloc( capacity * sizeof(Mask));
+    char line[IR_SIZE + 2];
+    for (int line_n = 0; fgets(line, IR_SIZE + 2, fp); ++line_n) {
+        line[strcspn(line, "\n")] = '\0';
+        if (++current >= capacity) {
+            capacity *= 2;
+            Mask *new = realloc(masks, capacity * sizeof(Mask));
+            if (!new) { free(masks); return NULL; }
+            masks = new;
+        }
+        masks[current] = encode_(line);
+    }
+    MaskSet *res = malloc(sizeof(MaskSet));
+    res->size = current + 1;
+    res->masks = masks;
+    return res;
+}
+
 /**
  * Frees an instruction set.
  *
@@ -176,9 +197,10 @@ static void print_colored_mask_(const char *str) {                              
     for (int i = 0; str[i] != '\0'; ++i) {
         if          (str[i] == 'x')     printf("\x1b[0m\x1b[2mx");
         else if     (str[i] == '1')     printf("\x1b[0m\x1b[92m1");
-        else                            printf("\x1b[0m\x1b[31m0");
+        else if     (str[i] == '0')     printf("\x1b[0m\x1b[31m0");
+        else                            printf("\x1b[0m\x1b[35m?");
     }
-    printf("\x1b[0m\n");
+    printf("\x1b[0m");
 }
 
 /**
@@ -192,6 +214,7 @@ void print_instr_set(const InstrSet *set) {                                     
         for (int j = 0; j < OPCODE_SIZE - strlen(set->instrs[i].opcode); ++j)    printf(" ");
         char *instr_str = decode_(set->instrs[i].instr);
         print_colored_mask_(instr_str);
+        printf("\n");
         free(instr_str);
     }
 }
@@ -218,10 +241,50 @@ void vec_instr_set(const InstrSet *set) {
  *
  * @param mask      mask.
  */
+void print_mask_ln(const Mask *mask) {
+    char *str = decode_(*mask);
+    print_colored_mask_(str);
+    printf("\n");
+    free(str);
+}
+
+/**
+ * Prints a mask, with don't cares as xs. No newline.
+ *
+ * @param mask      mask.
+ */
 void print_mask(const Mask *mask) {
     char *str = decode_(*mask);
     print_colored_mask_(str);
     free(str);
+}
+
+/**
+ * Prints a mask, with don't cares as xs.
+ *
+ * @param masks     mask.
+ */
+void print_masks_ln(const MaskSet *masks) {
+    for (int i = 0; i < masks->size; ++i) {
+        char *str = decode_(masks->masks[i]);
+        print_colored_mask_(str);
+        printf("\n");
+        free(str);
+    }
+}
+
+/**
+ * Prints a mask, with don't cares as xs. No newline.
+ *
+ * @param masks     mask.
+ */
+void print_masks(const MaskSet *masks) {
+    for (int i = 0; i < masks->size; ++i) {
+        char *str = decode_(masks->masks[i]);
+        print_colored_mask_(str);
+        printf("\n");
+        free(str);
+    }
 }
 
 /**
@@ -251,4 +314,18 @@ void write_mask(const Mask *mask, FILE *fp) {
     char *str = decode_(*mask);
     fprintf(fp, "%s", str);
     free(str);
+}
+
+/**
+ * Writes a mask set, with don't cares as xs.
+ *
+ * @param masks      mask.
+ * @param fp        output file.
+ */
+void write_masks(const MaskSet *masks, FILE *fp) {
+    for (int i = 0; i < masks->size; ++i) {
+        char *str = decode_(masks->masks[i]);
+        fprintf(fp, "%s\n", str);
+        free(str);
+    }
 }

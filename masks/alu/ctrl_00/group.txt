@@ -1,0 +1,12 @@
+sub_o
+sub_x_o
+subi_k
+sub_s_o
+sbb_o
+sbb_x_o
+sbbi_k
+sbb_s_o
+cmp_o
+cmp_x_o
+cmpi_k
+cmp_s_o

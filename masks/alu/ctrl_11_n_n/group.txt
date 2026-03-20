@@ -1,0 +1,14 @@
+ins
+clc
+clu
+cli
+tax
+tas
+inx
+dex
+pushf
+des
+rts_i
+rts_2
+rts_1
+nop

@@ -1,0 +1,12 @@
+std_o
+out_p
+st_s_o
+st_s+_o
+st_+s_o
+st_s-_o
+st_-s_o
+st_x_o
+st_x+_o
+st_+x_o
+st_x-_o
+st_-x_o

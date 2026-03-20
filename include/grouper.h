@@ -5,6 +5,6 @@
 
 Mask *lone_group(const InstrSet *set, const StringSet *subset);
 
-MaskSet *full_group(const InstrSet *set, StringSet *subset);
+MaskSet *auto_group(const InstrSet *full_set, StringSet *subset);
 
 #endif   // HELPERS_GROUPER_H

@@ -1,0 +1,4 @@
+cmp_o
+cmp_x_o
+cmp_s_o
+cmpi_k

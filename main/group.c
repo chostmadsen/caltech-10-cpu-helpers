@@ -10,10 +10,11 @@
  * @param argc
  * @param argv      ./group <instr.csv> <skip.txt> <group.txt> ?<out.txt>
  */
-int main(const int argc, const char **argv) {                                   // main
+int main(const int argc, const char **argv) {
+    // main
     // main
     if (argc < 4) {
-        fprintf(stderr, "usage: ./group <instr.csv> <skip.txt> <group.txt> ?<out.txt>\n");
+        fprintf(stderr, "usage: ./group_auto <instr.csv> <skip.txt> <group.txt> ?<out.txt>\n");
         return 1;
     }
 
@@ -38,19 +39,16 @@ int main(const int argc, const char **argv) {                                   
     // create group string set
     FILE *fp_g = fopen(argv[3], "r");
     if (fp_g == NULL) {
-        fprintf(stderr, "unable to open group set `%s`\n", argv[2]);
+        fprintf(stderr, "unable to open group set `%s`\n", argv[3]);
         return 1;
     }
-    const StringSet subset = read_string_set(fp_g);
+    StringSet subset = read_string_set(fp_g);
     fclose(fp_g);
 
-    // minimize instructions
-    Mask *min_eq = lone_group(&instrs, &subset);
-    if (min_eq == NULL) {
-        fprintf(stderr, "unable to group subset; possibly try splitting subset and trying again\n");
-        return 1;
+    const MaskSet *res = auto_group(&instrs, &subset);
+    for (int i = 0; i < res->size; i++) {
+        print_mask_ln(&res->masks[i]);
     }
-    print_mask(min_eq);
 
     // write boolean expression
     if (argc == 5) {
@@ -59,10 +57,9 @@ int main(const int argc, const char **argv) {                                   
             fprintf(stderr, "unable to open output file `%s`\n", argv[3]);
             return 1;
         }
-        write_mask(min_eq, fp_out);
+        write_masks(res, fp_out);
         fclose(fp_out);
     }
-    free(min_eq);
 
     return 0;
 }

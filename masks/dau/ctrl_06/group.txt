@@ -1,0 +1,13 @@
+popf
+ins
+tas
+pushf
+des
+st_+x_o
+st_x+_o
+st_-x_o
+st_x-_o
+ld_+x_o
+ld_x+_o
+ld_-x_o
+ld_x-_o

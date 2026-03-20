@@ -1,0 +1,11 @@
+subi_k
+sbbi_k
+cmpi_k
+xori_k
+adci_k
+tsa
+addi_k
+ori_k
+andi_k
+tsti_k
+ldi_k

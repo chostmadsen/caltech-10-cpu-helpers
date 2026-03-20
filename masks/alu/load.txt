@@ -1,0 +1,15 @@
+tsa
+txa
+ldi_k
+in_p
+ldd_o
+ld_x_o
+ld_x+_o
+ld_+x_o
+ld_x-_o
+ld_-x_o
+ld_s_o
+ld_s+_o
+ld_+s_o
+ld_s-_o
+ld_-s_o

@@ -1,0 +1,6 @@
+popf
+pushf
+rts_i
+rts_2
+call_3_a
+call_2_a

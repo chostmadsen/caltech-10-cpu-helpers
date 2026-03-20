@@ -1,8 +1,0 @@
-in_p
-ldd_o
-ld_s+o
-ld_s++o
-ld_+s+o
-ld_x+o
-ld_x++o
-ld_+x+o

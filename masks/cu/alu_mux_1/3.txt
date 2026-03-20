@@ -1,8 +1,0 @@
-xor_x_o
-xor_o
-or_x_o
-or_o
-and_x_o
-and_o
-tst_o
-tst_x_o

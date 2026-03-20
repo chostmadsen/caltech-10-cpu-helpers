@@ -1,0 +1,11 @@
+tax
+inx
+dex
+st_+s_o
+st_s+_o
+st_-s_o
+st_s-_o
+ld_+s_o
+ld_s+_o
+ld_-s_o
+ld_s-_o

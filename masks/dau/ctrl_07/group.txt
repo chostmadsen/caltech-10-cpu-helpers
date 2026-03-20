@@ -1,0 +1,11 @@
+pushf
+call_3_a
+call_2_a
+st_+s_o
+st_+x_o
+st_-s_o
+st_-x_o
+ld_+s_o
+ld_+x_o
+ld_-s_o
+ld_-x_o

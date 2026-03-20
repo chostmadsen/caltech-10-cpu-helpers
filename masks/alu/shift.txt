@@ -1,0 +1,6 @@
+lsr
+asr
+ror
+rrc
+rol
+lsl
