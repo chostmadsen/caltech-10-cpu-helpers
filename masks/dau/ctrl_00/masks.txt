@@ -1,2 +1,5 @@
-xxxx0xxxxx01xxxxxxxx
-xxxx10xxx1xxxxxxxxxx
+xxxx10xxx110xxxxxxxx
+xxxx01x0xx01xxxxxxxx
+xxxxx0x1xx01xxxxxxxx
+xxxx10xx01xxxxxxxxxx
+xxxx0xxx0101xxxxxxxx

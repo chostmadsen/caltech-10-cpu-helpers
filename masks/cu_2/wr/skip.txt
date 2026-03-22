@@ -1,0 +1,3 @@
+pushf
+call_3_a
+call_2_a

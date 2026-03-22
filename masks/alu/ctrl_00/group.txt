@@ -10,3 +10,4 @@ cmp_o
 cmp_x_o
 cmpi_k
 cmp_s_o
+not

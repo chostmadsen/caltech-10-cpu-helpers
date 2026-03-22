@@ -1,7 +1,6 @@
 popf
-ins
 pushf
-des
 rts_i
 rts_2
-rts_1
+call_3_a
+call_2_a

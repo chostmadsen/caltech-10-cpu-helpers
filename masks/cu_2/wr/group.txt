@@ -1,5 +1,5 @@
-std_o
 out_p
+std_o
 st_s_o
 st_s+_o
 st_+s_o
@@ -10,6 +10,3 @@ st_x+_o
 st_+x_o
 st_x-_o
 st_-x_o
-call_3_a
-call_2_a
-pushf
